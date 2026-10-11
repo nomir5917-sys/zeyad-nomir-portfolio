@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeyad Nomir | Cybersecurity & SOC Analyst Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            dark: '#080c14',
+                            panel: '#0e1626',
+                            border: '#1a273e',
+                            cyan: '#00f0ff',
+                            green: '#00ff88',
+                            blue: '#3b82f6',
+                            purple: '#a855f7',
+                            red: '#ff3366'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #080c14;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .cyber-grid {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+        }
+
+        .cyber-glow-cyan {
+            box-shadow: 0 0 30px -5px rgba(0, 240, 255, 0.25);
+        }
+
+        .cyber-glow-green {
+            box-shadow: 0 0 30px -5px rgba(0, 255, 136, 0.25);
+        }
+
+        .glass-panel {
+            background: rgba(14, 22, 38, 0.75);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(0, 240, 255, 0.12);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(0, 240, 255, 0.35);
+        }
+
+        .scanline {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 240, 255, 0.05) 50%,
+                rgba(0, 240, 255, 0.05)
+            );
+            background-size: 100% 4px;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080c14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1a273e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f0ff;
+        }
+    </style>
+</head>
+<body class="cyber-grid relative selection:bg-cyber-cyan/30 selection:text-cyber-cyan">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-slate-800/80 px-4 lg:px-8 py-3.5 transition-all">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 font-mono text-base sm:text-lg font-bold text-white tracking-wider">
+                <span class="text-cyber-cyan">&gt;</span> ZEYAD_NOMIR<span class="text-cyber-green">[SOC_ANALYST]</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-6 font-mono text-xs lg:text-sm text-slate-300">
+                <a href="#about" class="hover:text-cyber-cyan transition-colors">// About</a>
+                <a href="#projects" class="hover:text-cyber-cyan transition-colors">// Projects</a>
+                <a href="#training" class="hover:text-cyber-cyan transition-colors">// DEPI_&_Cisco</a>
+                <a href="#skills" class="hover:text-cyber-cyan transition-colors">// Skills</a>
+                <a href="#terminal" class="hover:text-cyber-cyan transition-colors">// Terminal_Lab</a>
+                <a href="#contact" class="px-4 py-1.5 rounded-lg border border-cyber-cyan/40 text-cyber-cyan hover:bg-cyber-cyan/10 transition-all font-sans font-medium text-xs">Contact</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white p-2" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden px-4 pt-4 pb-6 space-y-3 font-mono text-sm border-t border-slate-800/80 mt-3">
+            <a href="#about" class="block hover:text-cyber-cyan transition-colors">// About</a>
+            <a href="#projects" class="block hover:text-cyber-cyan transition-colors">// Projects</a>
+            <a href="#training" class="block hover:text-cyber-cyan transition-colors">// DEPI_&_Cisco</a>
+            <a href="#skills" class="block hover:text-cyber-cyan transition-colors">// Skills</a>
+            <a href="#terminal" class="block hover:text-cyber-cyan transition-colors">// Terminal_Lab</a>
+            <a href="#contact" class="block text-cyber-cyan">// Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen pt-28 pb-16 px-4 max-w-7xl mx-auto flex flex-col justify-center relative">
+        <div class="absolute top-1/3 left-10 w-80 h-80 bg-cyber-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/3 right-10 w-80 h-80 bg-cyber-green/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyber-green/40 text-xs font-mono text-cyber-green">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyber-green animate-pulse"></span>
+                    <span>AVAILABLE FOR SOC ANALYST OPPORTUNITIES</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                    Zeyad Nomir
+                </h1>
+
+                <h2 class="text-lg sm:text-2xl font-mono text-cyber-cyan font-semibold">
+                    CS Student @ AOU | Threat Detection & SOC Analyst
+                </h2>
+
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                    Computer Science Student at Arab Open University (AOU) specialized in <strong class="text-white">Security Operations (SOC)</strong>, <strong class="text-white">Threat Detection Workflows</strong>, and <strong class="text-white">Network Infrastructure</strong>. Formally trained through <strong class="text-cyber-green">Digital Egypt Pioneers Initiative (DEPI)</strong> and <strong class="text-cyber-cyan">Cisco Networking Academy (CCNA)</strong>.
+                </p>
+
+                <!-- Highlight Tags -->
+                <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+                    <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-graduation-cap text-cyber-cyan mr-1.5"></i>DEPI Specialist Trainee</span>
+                    <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-network-wired text-cyber-green mr-1.5"></i>Cisco CCNA (T216A & T216B)</span>
+                    <span class="px-3 py-1 rounded-md bg-slate-900 border border-slate-700 text-slate-300"><i class="fa-solid fa-shield-halved text-blue-400 mr-1.5"></i>Threat Check Creator</span>
+                </div>
+
+                <!-- Call to Actions -->
+                <div class="flex flex-wrap items-center gap-4 pt-4">
+                    <a href="#projects" class="px-6 py-3 rounded-xl bg-gradient-to-r from-cyber-cyan to-blue-600 text-slate-950 font-extrabold hover:shadow-lg hover:shadow-cyber-cyan/20 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-shield-virus"></i> View Threat Check Platform
+                    </a>
+                    <a href="#terminal" class="px-6 py-3 rounded-xl glass-panel text-slate-200 hover:text-white font-mono text-xs hover:border-cyber-cyan/50 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-terminal text-cyber-green"></i> Open Interactive Terminal
+                    </a>
+                    <button onclick="copyEmail()" class="px-4 py-3 rounded-xl border border-slate-700 hover:border-slate-500 text-slate-300 text-xs transition-all flex items-center gap-2">
+                        <i class="fa-regular fa-copy text-cyber-cyan"></i> <span id="emailText">nomir5917@gmail.com</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interactive Security Dashboard Card -->
+            <div class="lg:col-span-5">
+                <div class="glass-panel p-6 rounded-2xl cyber-glow-cyan relative overflow-hidden">
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-cyber-green"></span>
+                            <span class="text-xs font-mono text-slate-400 ml-2">SOC_SYSTEM_MONITOR.sh</span>
+                        </div>
+                        <span class="text-xs font-mono text-cyber-green flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-cyber-green animate-ping"></span> SECURE
+                        </span>
+                    </div>
+
+                    <div class="space-y-4 pt-4 font-mono text-xs">
+                        <div class="bg-slate-950/80 p-3.5 rounded-lg border border-slate-800 space-y-1">
+                            <div class="text-slate-400">// Candidate Profile Verification</div>
+                            <div class="text-white"><span class="text-cyber-cyan">Candidate:</span> Zeyad Nomir</div>
+                            <div class="text-white"><span class="text-cyber-cyan">Email:</span> nomir5917@gmail.com</div>
+                            <div class="text-white"><span class="text-cyber-cyan">Education:</span> Arab Open University (AOU)</div>
+                            <div class="text-white"><span class="text-cyber-cyan">Specialization:</span> SOC, Threat Triage & Networks</div>
+                        </div>
+
+                        <!-- Metric Progress Bars -->
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-slate-300 mb-1">
+                                    <span>DEPI Cybersecurity Training</span>
+                                    <span class="text-cyber-green">100%</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-cyber-green rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-slate-300 mb-1">
+                                    <span>Cisco CCNA Networking Modules</span>
+                                    <span class="text-cyber-cyan">100%</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-cyber-cyan rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-slate-300 mb-1">
+                                    <span>SIEM Log Analysis & Wireshark</span>
+                                    <span class="text-blue-400">92%</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-blue-400 rounded-full" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-cyber-green/10 border border-cyber-green/30 rounded-lg text-cyber-green text-[11px] flex items-center justify-between">
+                            <span><i class="fa-solid fa-circle-check mr-1.5"></i> Status: Certified & Job Ready</span>
+                            <span class="text-slate-400 font-mono">SOC Tier 1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Extended Training & Certifications Section -->
+    <section id="training" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-mono text-cyber-cyan uppercase tracking-widest">// SPECIALIZED DEPI & CISCO TRAINING</h2>
+            <p class="text-3xl font-extrabold text-white mt-2">Professional Training & Credentials</p>
+            <div class="w-16 h-1 bg-gradient-to-r from-cyber-cyan to-cyber-green mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- DEPI Spotlight Card -->
+            <div class="glass-panel p-8 rounded-2xl border border-cyber-green/40 relative overflow-hidden flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded bg-cyber-green/10 border border-cyber-green/30 text-cyber-green font-mono text-xs font-bold">MINISTRY OF COMMUNICATIONS (MCIT)</span>
+                        <i class="fa-solid fa-award text-cyber-green text-2xl"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white">Digital Egypt Pioneers Initiative (DEPI)</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Intensive training program focused on defensive cybersecurity, SOC incident response workflows, security auditing, and Linux system security.
+                    </p>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs font-mono">
+                        <div class="text-cyber-green font-bold">// Key Modules Completed:</div>
+                        <div class="text-slate-300">✓ Security Operations Center (SOC) Triage & Investigation</div>
+                        <div class="text-slate-300">✓ Linux File System Security & Forensics (<code class="text-cyber-cyan">/etc</code>, <code class="text-cyber-cyan">/var/log</code>)</div>
+                        <div class="text-slate-300">✓ Auditd, AIDE, and OSQuery File Integrity Monitoring</div>
+                        <div class="text-slate-300">✓ SIEM Log Rule Configuration & Alert Management</div>
+                    </div>
+                </div>
+
+                <div class="pt-6 mt-6 border-t border-slate-800 flex justify-between items-center text-xs font-mono text-slate-400">
+                    <span>Track: Network & Cybersecurity</span>
+                    <span class="text-cyber-green font-bold">Certified Graduate</span>
+                </div>
+            </div>
+
+            <!-- Cisco Networking Academy Card -->
+            <div class="glass-panel p-8 rounded-2xl border border-cyber-cyan/40 relative overflow-hidden flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan font-mono text-xs font-bold">CISCO NETWORKING ACADEMY</span>
+                        <i class="fa-solid fa-network-wired text-cyber-cyan text-2xl"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-bold text-white">CCNA Enterprise & Security Training</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Comprehensive practical coverage of routing, switching, network security protocols, VLAN segmentation, and enterprise architecture across university modules T216A & T216B.
+                    </p>
+
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs font-mono">
+                        <div class="text-cyber-cyan font-bold">// CCNA Core Topics Mastered:</div>
+                        <div class="text-slate-300">✓ Module T216A & T216B: Network Fundamentals & Security</div>
+                        <div class="text-slate-300">✓ IPv4/IPv6 Addressing, Subnetting & VLSM Design</div>
+                        <div class="text-slate-300">✓ Wireshark Packet Sniffing & Protocol Troubleshooting</div>
+                        <div class="text-slate-300">✓ Port Security, ACLs, NAT, DHCP Snooping & STP</div>
+                    </div>
+                </div>
+
+                <div class="pt-6 mt-6 border-t border-slate-800 flex justify-between items-center text-xs font-mono text-slate-400">
+                    <span>Modules: T216A & T216B</span>
+                    <span class="text-cyber-cyan font-bold">Verified Skills</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Credentials Grid -->
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+            <div class="glass-panel p-5 rounded-xl border border-slate-800">
+                <div class="text-blue-400 text-xl mb-2"><i class="fa-solid fa-cloud"></i></div>
+                <h4 class="text-base font-bold text-white">Huawei Cloud (HCCDA)</h4>
+                <p class="text-slate-400 text-xs mt-1">Cloud Computing, Virtualization, Cloud Security Fabric, and IAM access controls.</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-xl border border-slate-800">
+                <div class="text-purple-400 text-xl mb-2"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4 class="text-base font-bold text-white">Fortinet Network Security</h4>
+                <p class="text-slate-400 text-xs mt-1">Next-Generation Firewall (NGFW) policies, UTM features, and threat prevention.</p>
+            </div>
+
+            <div class="glass-panel p-5 rounded-xl border border-slate-800">
+                <div class="text-cyber-green text-xl mb-2"><i class="fa-solid fa-flag"></i></div>
+                <h4 class="text-base font-bold text-white">Hands-on Cyber Labs</h4>
+                <p class="text-slate-400 text-xs mt-1">Active practice on TryHackMe, Let's Defend SOC Analyst Path, and Hack The Box.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-mono text-cyber-cyan uppercase tracking-widest">// DEFENSIVE & SOC PROJECTS</h2>
+            <p class="text-3xl font-extrabold text-white mt-2">Projects & Investigations</p>
+            <div class="w-16 h-1 bg-gradient-to-r from-cyber-cyan to-cyber-green mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Project 1: Threat Check -->
+            <div class="glass-panel rounded-2xl overflow-hidden flex flex-col justify-between border border-slate-800 hover:border-cyber-cyan/50 transition-all group">
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan font-mono text-xs font-semibold">FLAGSHIP PLATFORM</span>
+                        <i class="fa-solid fa-shield-virus text-slate-500 group-hover:text-cyber-cyan transition-colors text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-cyber-cyan transition-colors">Threat Check Platform</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Full-stack cyber threat analysis and SOC triage application. Enables security analysts to evaluate IOCs (IPs, Hashes, Domains), inspect payload signatures, and correlate alert logs.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">Python</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">SIEM Logic</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">Threat Intel</span>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openModal('threat-check')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-cyber-cyan hover:text-slate-950 font-bold text-xs text-slate-200 transition-all flex items-center justify-center gap-2 border border-slate-800">
+                        <i class="fa-solid fa-code"></i> Inspect Threat Engine Logic
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 2: Network Traffic Analysis -->
+            <div class="glass-panel rounded-2xl overflow-hidden flex flex-col justify-between border border-slate-800 hover:border-cyber-green/50 transition-all group">
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded bg-cyber-green/10 border border-cyber-green/30 text-cyber-green font-mono text-xs font-semibold">PCAP & WIRESHARK</span>
+                        <i class="fa-solid fa-network-wired text-slate-500 group-hover:text-cyber-green transition-colors text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-cyber-green transition-colors">Traffic Forensics & PCAP Analysis</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Deep packet capture analysis with Wireshark. Investigating ARP spoofing, TCP SYN flood DoS attacks, DNS tunneling, and credential exposure in unencrypted flows.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">Wireshark</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">CCNA</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">PCAP Analysis</span>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openModal('network')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-cyber-green hover:text-slate-950 font-bold text-xs text-slate-200 transition-all flex items-center justify-center gap-2 border border-slate-800">
+                        <i class="fa-solid fa-microscope"></i> View PCAP Case Study
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 3: Healthcare STRIDE Modeling -->
+            <div class="glass-panel rounded-2xl overflow-hidden flex flex-col justify-between border border-slate-800 hover:border-blue-500/50 transition-all group">
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded bg-blue-500/10 border border-blue-500/30 text-blue-400 font-mono text-xs font-semibold">THREAT MODELING</span>
+                        <i class="fa-solid fa-heart-pulse text-slate-500 group-hover:text-blue-400 transition-colors text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">Healthcare System STRIDE Model</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Structured security risk assessment for a digital patient healthcare system using Microsoft STRIDE to mitigate Spoofing, Tampering, and Elevation of Privilege.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">STRIDE</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">Risk Assessment</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300 text-xs font-mono">RBAC</span>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <button onclick="openModal('stride')" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-blue-500 hover:text-slate-950 font-bold text-xs text-slate-200 transition-all flex items-center justify-center gap-2 border border-slate-800">
+                        <i class="fa-solid fa-file-contract"></i> View STRIDE Matrix
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive SOC Terminal -->
+    <section id="terminal" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+            <!-- Terminal Header -->
+            <div class="bg-slate-950 px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                    <span class="w-3 h-3 rounded-full bg-cyber-green inline-block"></span>
+                    <span class="text-xs font-mono text-slate-400 ml-3">zeyad@soc-workstation:~ (interactive-cli)</span>
+                </div>
+                <div class="text-xs font-mono text-slate-500">Try typing: depi, cisco, ccna, scan</div>
+            </div>
+
+            <!-- Terminal Output Window -->
+            <div id="terminalOutput" class="bg-slate-950 p-6 font-mono text-xs sm:text-sm text-slate-300 h-96 overflow-y-auto space-y-3 scanline">
+                <div class="text-cyber-green font-bold">
+                    [+] Zeyad Nomir Cybersecurity & SOC Interactive Terminal v3.0 Ready.
+                </div>
+                <div class="text-slate-400">
+                    Type <span class="text-cyber-cyan font-bold">help</span> to list all interactive commands (<span class="text-cyber-green">depi</span>, <span class="text-cyber-cyan">cisco</span>, <span class="text-cyber-green">whoami</span>, <span class="text-cyber-cyan">scan</span>).
+                </div>
+            </div>
+
+            <!-- Terminal Form -->
+            <form id="terminalForm" class="bg-slate-900 px-6 py-3 border-t border-slate-800 flex items-center gap-3">
+                <span class="text-cyber-cyan font-mono font-bold text-sm">zeyad@soc-lab:~$</span>
+                <input type="text" id="terminalInput" autocomplete="off" placeholder="Type command here (e.g., depi, cisco, skills, scan)..." class="w-full bg-transparent text-white font-mono text-sm focus:outline-none placeholder-slate-600">
+                <button type="submit" class="text-cyber-cyan hover:text-white px-4 py-1.5 text-xs font-mono bg-slate-800 hover:bg-slate-700 rounded transition-all">EXECUTE</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Skills Showcase -->
+    <section id="skills" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-mono text-cyber-cyan uppercase tracking-widest">// SKILLSET & TOOLKIT</h2>
+            <p class="text-3xl font-extrabold text-white mt-2">Technical Capabilities</p>
+            <div class="w-16 h-1 bg-gradient-to-r from-cyber-cyan to-cyber-green mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyber-green/40 transition-all">
+                <div class="text-cyber-green text-2xl mb-3"><i class="fa-solid fa-user-shield"></i></div>
+                <h3 class="text-base font-bold text-white mb-3">SOC Operations</h3>
+                <ul class="space-y-2 text-slate-300 text-xs font-mono">
+                    <li>• Alert Triage & Incident Handling</li>
+                    <li>• SIEM Event Log Correlation</li>
+                    <li>• Splunk & Elastic Fundamentals</li>
+                    <li>• Malware Hash & Payload Analysis</li>
+                </ul>
+            </div>
+
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-cyber-cyan/40 transition-all">
+                <div class="text-cyber-cyan text-2xl mb-3"><i class="fa-solid fa-network-wired"></i></div>
+                <h3 class="text-base font-bold text-white mb-3">Cisco Networking</h3>
+                <ul class="space-y-2 text-slate-300 text-xs font-mono">
+                    <li>• CCNA Modules T216A & T216B</li>
+                    <li>• IPv4/IPv6 Subnetting & VLSM</li>
+                    <li>• VLANs, Trunking & STP</li>
+                    <li>• Wireshark Packet Inspection</li>
+                </ul>
+            </div>
+
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-blue-400/40 transition-all">
+                <div class="text-blue-400 text-2xl mb-3"><i class="fa-solid fa-terminal"></i></div>
+                <h3 class="text-base font-bold text-white mb-3">System & Linux</h3>
+                <ul class="space-y-2 text-slate-300 text-xs font-mono">
+                    <li>• Linux Security (<code class="text-cyber-cyan">/etc</code>, <code class="text-cyber-cyan">/var/log</code>)</li>
+                    <li>• Auditd & File Integrity Rules</li>
+                    <li>• Windows Event Logs & Registry</li>
+                    <li>• Bash & Shell Scripting</li>
+                </ul>
+            </div>
+
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 hover:border-purple-400/40 transition-all">
+                <div class="text-purple-400 text-2xl mb-3"><i class="fa-solid fa-code"></i></div>
+                <h3 class="text-base font-bold text-white mb-3">Coding & Security</h3>
+                <ul class="space-y-2 text-slate-300 text-xs font-mono">
+                    <li>• Python Automation Scripts</li>
+                    <li>• Threat Check Platform Dev</li>
+                    <li>• STRIDE Threat Modeling</li>
+                    <li>• SQL Queries & Database Basics</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-slate-800 relative overflow-hidden">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyber-cyan/10 text-cyber-cyan text-xs font-mono">
+                        <i class="fa-solid fa-paper-plane"></i> GET IN TOUCH
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Let's Connect</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        I am open to SOC Analyst positions, Cybersecurity internships, and technical collaborations. Reach out directly via email.
+                    </p>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-cyber-cyan">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400 font-mono">DIRECT EMAIL</div>
+                                <a href="mailto:nomir5917@gmail.com" class="text-white font-semibold hover:text-cyber-cyan transition-colors">nomir5917@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-cyber-green">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400 font-mono">TRAINING & EDUCATION</div>
+                                <div class="text-white font-semibold">AOU (CS) | DEPI | Cisco CCNA</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-7 bg-slate-950/80 p-6 sm:p-8 rounded-2xl border border-slate-800">
+                    <form id="contactForm" onsubmit="handleForm(event)" class="space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-mono text-slate-400 mb-1">NAME</label>
+                                <input type="text" required placeholder="SOC Recruiter / Team Lead" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-cyan">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-slate-400 mb-1">EMAIL</label>
+                                <input type="email" required placeholder="recruiter@company.com" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-cyan">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-slate-400 mb-1">SUBJECT</label>
+                            <input type="text" required placeholder="SOC Analyst Opportunity / DEPI Graduate Inquiry" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-cyan">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-slate-400 mb-1">MESSAGE</label>
+                            <textarea rows="4" required placeholder="Hi Zeyad, I reviewed your SOC portfolio and Threat Check project..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyber-cyan"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyber-cyan to-blue-600 text-slate-950 font-bold hover:shadow-lg hover:shadow-cyber-cyan/20 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+
+                    <div id="formAlert" class="hidden mt-4 p-4 rounded-xl bg-cyber-green/10 border border-cyber-green/30 text-cyber-green text-xs font-mono text-center">
+                        ✓ Message received! I will get back to you at your email address shortly.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 py-8 px-4 text-center font-mono text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                © 2026 Zeyad Nomir | Cybersecurity & SOC Operations Portfolio
+            </div>
+            <div class="flex items-center gap-4 text-slate-400">
+                <a href="mailto:nomir5917@gmail.com" class="hover:text-cyber-cyan"><i class="fa-solid fa-envelope"></i></a>
+                <a href="#" class="hover:text-cyber-cyan"><i class="fa-brands fa-github"></i></a>
+                <a href="#" class="hover:text-cyber-cyan"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modal Popup -->
+    <div id="projectModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-3xl rounded-2xl border border-slate-800 overflow-hidden max-h-[90vh] flex flex-col">
+            <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+                <h3 id="modalTitle" class="text-xl font-bold text-white font-mono">Project Modal</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div id="modalContent" class="p-6 overflow-y-auto space-y-4 text-sm text-slate-300">
+                <!-- Modal Body -->
+            </div>
+            <div class="p-4 border-t border-slate-800 bg-slate-950 flex justify-end">
+                <button onclick="closeModal()" class="px-5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-mono text-xs">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Copy Email to Clipboard
+        function copyEmail() {
+            const email = "nomir5917@gmail.com";
+            const textSpan = document.getElementById('emailText');
+            
+            const temp = document.createElement('input');
+            temp.value = email;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+
+            textSpan.textContent = "Copied!";
+            setTimeout(() => {
+                textSpan.textContent = email;
+            }, 2000);
+        }
+
+        // Contact Form Handler
+        function handleForm(e) {
+            e.preventDefault();
+            document.getElementById('contactForm').reset();
+            const alert = document.getElementById('formAlert');
+            alert.classList.remove('hidden');
+            setTimeout(() => alert.classList.add('hidden'), 5000);
+        }
+
+        // Terminal Commands Database
+        const commands = {
+            'help': 'Available commands: <span class="text-cyber-green">depi, cisco, ccna, whoami, projects, skills, scan, contact, clear</span>',
+            'depi': '<strong class="text-cyber-green">Digital Egypt Pioneers Initiative (DEPI):</strong> Graduate of the Network & Cybersecurity track. Specialized in SOC alert triage, Linux security (<code class="text-cyber-cyan">/etc</code>, <code class="text-cyber-cyan">/var/log</code>), auditd monitoring, and threat detection workflows.',
+            'cisco': '<strong class="text-cyber-cyan">Cisco Networking Academy:</strong> Completed CCNA modules T216A & T216B. Practical mastery of IPv4/IPv6 subnetting, VLAN routing, port security, ACLs, and Wireshark protocol analysis.',
+            'ccna': '<strong class="text-cyber-cyan">CCNA Certification Modules:</strong> Includes Enterprise Networking, Switching, Routing, IPv4 Subnetting, Network Security Policies, and Packet Inspection.',
+            'whoami': 'Zeyad Nomir - Computer Science Student @ Arab Open University (AOU) & Certified SOC Analyst Trainee (DEPI & Cisco CCNA). Email: nomir5917@gmail.com',
+            'projects': '1. <strong class="text-white">Threat Check Platform</strong> (Cyber Threat Analysis)<br>2. <strong class="text-white">Wireshark Traffic Forensics</strong> (PCAP Inspection)<br>3. <strong class="text-white">Healthcare STRIDE Threat Model</strong>',
+            'skills': 'SOC Alert Triage | Wireshark PCAP | CCNA Routing/Switching | Linux Security (/etc/passwd, /var/log/auth.log) | Auditd | Python Automation',
+            'scan': '<span class="text-cyber-green">[+] Initiating local security posture check...</span><br>[✓] Firewall Status: ACTIVE<br>[✓] System Auditd Daemon: RUNNING<br>[✓] Open Ports: 80 (HTTP), 443 (HTTPS), 22 (SSH Key Auth)<br>[✓] Threat Score: 0 (Clean & Hardened Environment)',
+            'contact': 'Email: <a href="mailto:nomir5917@gmail.com" class="text-cyber-cyan underline">nomir5917@gmail.com</a> | Location: Egypt'
+        };
+
+        const terminalForm = document.getElementById('terminalForm');
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalOutput = document.getElementById('terminalOutput');
+
+        terminalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const val = terminalInput.value.trim().toLowerCase();
+            if (!val) return;
+
+            // Output user input
+            const cmdDiv = document.createElement('div');
+            cmdDiv.innerHTML = `<span class="text-cyber-cyan font-bold">zeyad@soc-lab:~$</span> <span class="text-white">${val}</span>`;
+            terminalOutput.appendChild(cmdDiv);
+
+            if (val === 'clear') {
+                terminalOutput.innerHTML = '';
+            } else if (commands[val]) {
+                const resDiv = document.createElement('div');
+                resDiv.className = 'text-slate-300 ml-2 border-l-2 border-cyber-cyan/40 pl-3 py-1';
+                resDiv.innerHTML = commands[val];
+                terminalOutput.appendChild(resDiv);
+            } else {
+                const errDiv = document.createElement('div');
+                errDiv.className = 'text-red-400 ml-2';
+                errDiv.innerHTML = `Command not recognized: '${val}'. Type <span class="text-cyber-green">help</span> or <span class="text-cyber-cyan">depi</span>.`;
+                terminalOutput.appendChild(errDiv);
+            }
+
+            terminalInput.value = '';
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        });
+
+        // Project Modals
+        const modal = document.getElementById('projectModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+
+        const modalData = {
+            'threat-check': {
+                title: 'Threat Check Platform - SOC Investigation Workspace',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-slate-300">The <strong>Threat Check Platform</strong> is a comprehensive cybersecurity analysis tool engineered to help SOC analysts correlate alerts, check IOC hashes, and inspect suspicious network activity.</p>
+                        
+                        <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 space-y-2 font-mono text-xs">
+                            <div class="text-cyber-cyan font-bold">// Detection Engine Rule Sample (Python):</div>
+<pre class="text-slate-300 overflow-x-auto">
+def analyze_ssh_log(log_entry):
+    # Detect Brute-Force SSH Attempts
+    if "Failed password" in log_entry and "port" in log_entry:
+        return {
+            "threat": "SSH Brute Force",
+            "severity": "HIGH",
+            "action": "Trigger SOC Triage Alert & Block IP"
+        }
+    return {"threat": "None", "severity": "LOW"}
+</pre>
+                        </div>
+                    </div>
+                `
+            },
+            'network': {
+                title: 'Wireshark & Network PCAP Forensics',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-slate-300">Detailed PCAP packet analysis built on top of Cisco CCNA network fundamentals.</p>
+                        <ul class="list-disc list-inside space-y-1 text-xs font-mono text-slate-300">
+                            <li>Reconstructed HTTP POST authentication payload to highlight unencrypted password exposure.</li>
+                            <li>Identified ARP Poisoning Man-in-the-Middle (MITM) patterns between gateway and target.</li>
+                            <li>Analyzed TCP SYN Flood denial-of-service traffic patterns using Wireshark filters.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'stride': {
+                title: 'Healthcare STRIDE Threat Model',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-slate-300">Threat assessment applying Microsoft STRIDE methodology to secure patient health records.</p>
+                        <div class="grid sm:grid-cols-2 gap-3 text-xs font-mono">
+                            <div class="p-3 bg-slate-900 rounded border border-slate-800">
+                                <span class="text-red-400 font-bold">Spoofing:</span> Mitigated using OAuth2 & MFA.
+                            </div>
+                            <div class="p-3 bg-slate-900 rounded border border-slate-800">
+                                <span class="text-yellow-400 font-bold">Tampering:</span> Secured with HMAC signatures.
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        function openModal(key) {
+            if (modalData[key]) {
+                modalTitle.textContent = modalData[key].title;
+                modalContent.innerHTML = modalData[key].content;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    </script>
+</body>
+</html>
